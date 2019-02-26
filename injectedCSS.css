@@ -21,12 +21,15 @@ body {
   position: fixed;
   width: 100%;
   z-index: 1000;
-  background-color: white;
-  border-style: solid;
+  border-top: 3px solid;
   border-radius: 0.2em;
-  border-color: black;
   display: inline-block;
-  box-shadow: -10px -10px 10px rgba(0, 0, 0, 0.5);
+  border-color: #FECD57;
+  background-color: black;
+}
+
+#outerDiv, #drag_resize{
+  box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.5);
 }
 
 #categoryHolder{
@@ -34,12 +37,22 @@ body {
 }
 
 #drag_resize{
-  background-color: #FECD57;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 3px solid black;
+  border: 3px solid;
   margin: 0 auto;
+  margin-top: -25px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 20pt;
+  border-color: black;
+  color: black;
+  background-color: #FECD57;
+}
+
+#drag_resize:hover{
+  background-color: #E5BF61;
 }
 
 .reviewHolder{
@@ -52,6 +65,7 @@ body {
   width: 50%;
   height: 30em;
   overflow: scroll;
+  background-color: white;
 }
 
 .nowHidden{

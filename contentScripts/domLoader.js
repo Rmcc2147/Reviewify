@@ -16,15 +16,18 @@ class DOMLoader{
     scrollerHolder.id = "scrollerHolder";
 
     let drag_resize = document.createElement('div');
+    drag_resize.textContent = "^";
     drag_resize.id = "drag_resize";
 
     this.dom.appendChild(drag_resize);
     this.dom.appendChild(categoryHolder);
     this.dom.appendChild(scrollerHolder);
 
-    makeResizable(this.dom)
-    let insert_dom_here = document.getElementById('bundleV2_feature_div');
-    insert_dom_here.parentNode.insertBefore(this.dom, insert_dom_here.nextSibling);
+    makeResizable(this.dom);
+
+    document.body.appendChild(this.dom);
+    // let insert_dom_here = document.getElementById('bundleV2_feature_div');
+    // insert_dom_here.parentNode.insertBefore(this.dom, insert_dom_here.nextSibling);
   }
 
   appendReview(reviewJSON){
