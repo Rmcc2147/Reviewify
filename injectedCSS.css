@@ -1,0 +1,132 @@
+body {
+  --pink: #FF1C68;
+  --green: #14D790;
+  --blue: #198FE3;
+  --black: #21282D;
+  --purple: #9B65DE;
+}
+
+.noSelect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+#outerDiv{
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  border-style: solid;
+  border-radius: 0.2em;
+  border-color: black;
+  display: inline-block;
+  box-shadow: -10px -10px 10px rgba(0, 0, 0, 0.5);
+}
+
+#categoryHolder{
+  display: inline-block;
+}
+
+#drag_resize{
+  background-color: #FECD57;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid black;
+  margin: 0 auto;
+}
+
+.reviewHolder{
+  transform: scale(0.9);
+  border-style: solid;
+  border-radius: 0.2em;
+  border-color: black;
+  display: inline-block;
+  padding: 1em;
+  width: 50%;
+  height: 30em;
+  overflow: scroll;
+}
+
+.nowHidden{
+  display: none;
+}
+
+.nowVisible{
+  display: block;
+}
+
+.categoryButtonOuter{
+  cursor: pointer;
+  width:200px;
+  background-color:#FECD57;
+  border:1px solid #9B9B9B;
+  border-radius:4px;
+  padding:10px;
+  margin:10px 5px;
+  display: inline-block;
+}
+
+.categoryButtonOuter:hover{
+  background-color: #E5BF61;
+}
+
+.categoryButtonInner{
+  padding-right:10px;
+  padding-left:10px;
+}
+
+.categoryButtonSpan{
+  font-size:12px;
+  font-family:Arial;
+  font-weight:bold;
+  color:#333333;
+  white-space:nowrap;
+  display:block;
+  text-align:center;
+}
+
+.commentIcon{
+  width: 20px;
+  height: 20px;
+  float:left;
+  background: #fff url('chrome-extension://__MSG_@@extension_id__/images/comment_icon.jpg');
+  background-repeat: no-repeat;
+  background-size: 17px 17px;
+  border:1px solid #9B9B9B;
+}
+
+.reviewScroller {
+  width: 100%;
+  height: auto;
+}
+
+.scrollButton {
+  position: absolute;
+  width: auto;
+  height: auto;
+  border-style: solid;
+  border-radius: 0.2em;
+  border-color: black;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.scrollButtonLeft{
+  width: 5em;
+  height: 1em;
+  background-color: red;
+  float: left;
+}
+.scrollButtonRight{
+  width: 5em;
+  height: 1em;
+  background-color: blue;
+  float: right;
+}

@@ -1,0 +1,46 @@
+{
+    "name": "Amazon comment rearranger",
+    "version": "1.0",
+    "description": "Print out Amazon reviews.",
+    "permissions": [
+      "activeTab",
+      "declarativeContent",
+      "storage",
+      "unlimitedStorage"
+    ],
+    "background": {
+      "scripts": [
+        "backgroundScripts/background.js"
+      ],
+      "persistent": false
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://*.amazon.co.uk/*", "*://*.amazon.com/*"],
+        "js": [
+          "libraries/mozPolyfill/browser-polyfill.js",
+          "libraries/nlp/removeStopWords.js",
+          "contentScripts/domLoader.js",
+          "contentScripts/storageAccess.js",
+          "contentScripts/reviewParser.js",
+          "contentScripts/init.js",
+          "contentScripts/reviewGrabber.js",
+          "contentScripts/keyWords.js",
+          "contentScripts/misc.js",
+          "contentScripts/request.js",
+          "contentScripts/scroller.js",
+          "contentScripts/init.js"
+        ],
+        "css":[
+          "injectedCSS.css"
+        ]
+      }
+    ],
+    "web_accessible_resources":[
+      "images/*.jpg"
+    ],
+    "page_action": {
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 2
+  }

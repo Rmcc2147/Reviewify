@@ -1,0 +1,48 @@
+body {
+  width: 10em;
+  height: auto;
+}
+
+#printReviewsButton {
+  width: 8em;
+  height: 8em;
+  margin: auto;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.activeButton {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: white;
+  border: 0.2em solid #33F6FF;
+  cursor: pointer;
+}
+
+.activeButton:hover {
+  background-color: #33F6FF;
+  color: white;
+}
+
+.inactiveButton {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: white;
+  border: 0.2em solid #FF0000;
+  cursor: pointer;
+}
+
+.inactiveButton:hover {
+  background-color: #FF0000;
+  color: white;
+}
+
+.noSelect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
