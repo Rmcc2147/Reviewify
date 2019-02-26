@@ -110,6 +110,7 @@ class DOMLoader{
 function makeResizable(elem){
   const RESIZER = elem.children[0];
   const MIN_HEIGHT = 118;
+  const MAX_HEIGHT = window.innerHeight - 50;
   let original_height = 0;
   let original_y = 0;
   let original_mouse_y = 0;
@@ -124,7 +125,7 @@ function makeResizable(elem){
 
   function resize(e){
     const height = original_height - (e.pageY - original_mouse_y);
-    if(height > MIN_HEIGHT){
+    if(height > MIN_HEIGHT && height < MAX_HEIGHT){
       elem.style.height = height + 'px'
       elem.style.top = original_y + (e.pageY - original_mouse_y) + 'px'
     }
