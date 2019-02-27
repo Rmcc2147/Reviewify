@@ -29,8 +29,6 @@ class DOMLoader{
     makeResizable(this.dom);
 
     document.body.appendChild(this.dom);
-    // let insert_dom_here = document.getElementById('bundleV2_feature_div');
-    // insert_dom_here.parentNode.insertBefore(this.dom, insert_dom_here.nextSibling);
   }
 
   appendReview(reviewJSON){
@@ -122,7 +120,7 @@ class DOMLoader{
 }
 
 function makeResizable(elem){
-  const RESIZER = elem.children[0];
+  const RESIZER = elem.querySelectorAll("#drag_resize")[0];
   const MIN_HEIGHT = 118;
   const MAX_HEIGHT = window.innerHeight - 50;
   let original_height = 0;
@@ -157,6 +155,7 @@ class LoadingBar{
     this.wrapper = this.makeBar();
     this.loadingBar;
     this.percentageDone;
+    this.backgroundBar;
   }
 
   getReviewNum(){
@@ -171,6 +170,9 @@ class LoadingBar{
     wrapper.id = "loadingBar_wrapper";
     this.loadingBar = document.createElement('div');
     this.loadingBar.id = "loadingBar";
+    this.backgroundBar = document.createElement('div');
+    this.backgroundBar.id = "backgroundBar";
+    wrapper.appendChild(this.backgroundBar);
     wrapper.appendChild(this.loadingBar);
 
     this.displayContent();
@@ -181,6 +183,7 @@ class LoadingBar{
   displayContent(){
     this.percentageDone = (this.reviewsFound/this.totalReviews)*100;
     this.loadingBar.textContent = this.percentageDone.toFixed(1) + "%";
+    this.loadingBar.style.width = this.percentageDone.toFixed(1) + "%";
   }
 
   incrementProgress(){

@@ -12,7 +12,7 @@
   bottom: 0px;
   position: fixed;
   width: 100%;
-  z-index: 1000;
+  z-index: 100;
   border-top: 3px solid;
   border-radius: 0.2em;
   display: inline-block;
@@ -50,10 +50,29 @@
 }
 
 #loadingBar_wrapper{
-  width: 20%;
+  width: 60%;
+  height: 25px;
   text-align: center;
+  overflow: auto;
+  position: relative;
+}
+
+#backgroundBar{
+  width: 100%;
+  height: 25px;
+  position: absolute;
+  background-color: white;
+  z-index: 101;
+}
+
+#loadingBar{
+  width: 1%;
+  height: 25px;
   background: radial-gradient(ellipse at top right, #ffffff, #003ae8);
-  border-radius: 5%;
+  float: left;
+  margin-top: -25px;
+  position: absolute;
+  z-index: 102;
 }
 
 #loadingBar_wrapper, #loadingBar{
@@ -116,10 +135,10 @@
   width: 20px;
   height: 20px;
   float:left;
-  background: #fff url('chrome-extension://__MSG_@@extension_id__/images/comment_icon.jpg');
+  background-image: url('chrome-extension://__MSG_@@extension_id__/images/comment_icon.jpg');
   background-repeat: no-repeat;
-  background-size: 17px 17px;
-  border:1px solid #9B9B9B;
+  background-size: cover;
+  border-radius: 0.2em;;
 }
 
 .reviewScroller {
