@@ -1,3 +1,5 @@
+"use strict";
+
 class ReviewGrabber{
   constructor(){
     this.url = document.getElementsByClassName("a-link-emphasis")[0].href;

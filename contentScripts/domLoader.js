@@ -1,9 +1,12 @@
+"use strict";
+
 class DOMLoader{
   constructor(){
     this.url = location.url;
     this.dom;
     this.categories = [];
     this.scrollers = [];
+    this.loadingBar;
   }
 
   loadDOM(){
@@ -38,6 +41,12 @@ class DOMLoader{
         }
       }
     }
+  }
+
+  createLoadingBar(){
+    this.loadingBar = new LoadingBar();
+    const INSERT_HERE = this.dom.querySelectorAll("#drag_resize")[0];
+    this.dom.insertBefore(this.loadingBar.wrapper, INSERT_HERE.nextSibling);
   }
 
   newCategory(keyword){
@@ -92,6 +101,11 @@ class DOMLoader{
   }
 
   addReviews(reviewArr){
+
+    if(typeof this.loadingBar == "object"){
+      this.loadingBar.incrementProgress();
+    }
+
     for (let i = 0; i < reviewArr.length; i++) {
       for (let j = 0 ; j < reviewArr[i].keywords.length ; j++){
 
@@ -133,5 +147,53 @@ function makeResizable(elem){
 
   function stopResize(){
     window.removeEventListener('mousemove', resize)
+  }
+}
+
+class LoadingBar{
+  constructor(){
+    this.totalReviews = this.getReviewNum();
+    this.reviewsFound = 0;
+    this.wrapper = this.makeBar();
+    this.loadingBar;
+    this.percentageDone;
+  }
+
+  getReviewNum(){
+    let num_with_string = document.getElementById("acrCustomerReviewText").textContent;
+    let num = parseFloat(num_with_string.replace(/\D/g,''));
+    num = Math.ceil(num/10)*8;
+    return num
+  }
+
+  makeBar(){
+    let wrapper = document.createElement('div');
+    wrapper.id = "loadingBar_wrapper";
+    this.loadingBar = document.createElement('div');
+    this.loadingBar.id = "loadingBar";
+    wrapper.appendChild(this.loadingBar);
+
+    this.displayContent();
+
+    return wrapper;
+  }
+
+  displayContent(){
+    this.percentageDone = (this.reviewsFound/this.totalReviews)*100;
+    this.loadingBar.textContent = this.percentageDone.toFixed(1) + "%";
+  }
+
+  incrementProgress(){
+    this.reviewsFound += 8;
+    this.displayContent();
+    if(this.percentageDone >= 100){
+      this.removeBar();
+    }
+  }
+
+  async removeBar(){
+    setTimeout(function(){
+      this.wrapper.remove();
+    }.bind(this), 2500);
   }
 }

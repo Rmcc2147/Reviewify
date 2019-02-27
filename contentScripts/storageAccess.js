@@ -1,3 +1,5 @@
+"use strict";
+
 class StorageAccess{
   constructor(pathname){
     this.pathname = pathname;
@@ -19,7 +21,7 @@ class StorageAccess{
       let returnData = await browser.storage.local.get(this.pathname);
       return this.parseFromStorage(JSON.parse(returnData[this.pathname]));
     }catch(err){
-      return null;
+      return undefined;
     }
   }
 

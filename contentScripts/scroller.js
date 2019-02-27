@@ -1,3 +1,5 @@
+"use strict";
+
 class Scroller{
 
   constructor(keyword){

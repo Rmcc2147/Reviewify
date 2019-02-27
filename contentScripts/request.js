@@ -1,3 +1,5 @@
+"use strict";
+
 async function getKeywords(text){
   let result = await classifyText(text);
   return result;

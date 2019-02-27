@@ -1,3 +1,5 @@
+"use strict";
+
 String.prototype.sortByKeyWords = function(){
   let stringToSort = this.valueOf();
   let priceKeyWords = new Array(

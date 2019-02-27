@@ -1,3 +1,5 @@
+"use strict";
+
 let printReviews = document.getElementById("printReviewsButton");
 
 function toggleClasses(element, oldClass, newClass){
