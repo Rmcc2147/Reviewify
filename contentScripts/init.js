@@ -42,7 +42,6 @@ async function init(){
       domLoader.createLoadingBar();
 
       while(reviewGrabber.url){
-
         let reviews = await reviewGrabber.getReviews();
         let reviewContent = REVIEW_PARSER.parseReviews(reviews);
 

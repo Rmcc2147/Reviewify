@@ -8,30 +8,32 @@ class Scroller{
     this.reviewHolder = document.createElement('div');
     this.category = keyword;
     this.element = this.createScroller();
+    this.scrollButton;
   }
 
   createScroller() {
     let scroller = document.createElement('div');
-    let scrollButton = document.createElement('div');
-    let scrollButtonLeft = document.createElement('div');
+    this.scrollButton = document.createElement('div');
+
+    let scrollButtonLeft = buttonTemplate("Left");
     scrollButtonLeft.addEventListener('click', function(){
       this.scrollLeft();
     }.bind(this));
-    let scrollButtonRight = document.createElement('div');
+    let scrollButtonRight = buttonTemplate("Right");
     scrollButtonRight.addEventListener('click', function(){
       this.scrollRight();
     }.bind(this));
     this.reviewHolder.classList.add('reviewHolder');
-    scrollButton.classList.add('scrollButton');
+    this.scrollButton.classList.add('scrollButton');
     scrollButtonLeft.classList.add('scrollButtonLeft');
     scrollButtonRight.classList.add('scrollButtonRight');
-    scrollButton.appendChild(scrollButtonLeft);
-    scrollButton.appendChild(scrollButtonRight);
+    this.scrollButton.appendChild(scrollButtonLeft);
+    this.scrollButton.appendChild(scrollButtonRight);
 
     scroller.id = "scrollerForWord_" + this.category;
     scroller.classList.add('reviewScroller');
     scroller.classList.add('nowHidden');
-    scroller.appendChild(scrollButton);
+    this.reviewHolder.appendChild(this.scrollButton);
     scroller.appendChild(this.reviewHolder);
 
     return scroller;
@@ -64,6 +66,8 @@ class Scroller{
     let text = tempDiv.querySelectorAll(".review-text")[0].outerHTML;
     tempDiv.querySelectorAll(".review-text")[0].outerHTML = "";
     this.reviewHolder.innerHTML = tempDiv.innerHTML + text;
+    this.reviewHolder.firstChild.style.marginTop = "40px";
+    this.reviewHolder.insertBefore(this.scrollButton, this.reviewHolder.firstChild);
   }
 
   scrollLeft(){

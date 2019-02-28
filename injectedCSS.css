@@ -73,6 +73,8 @@
   margin-top: -25px;
   position: absolute;
   z-index: 102;
+  transition-property: width;
+  transition-duration: 1s;
 }
 
 #loadingBar_wrapper, #loadingBar{
@@ -100,9 +102,10 @@
   display: block;
 }
 
-.categoryButtonOuter{
+.buttonOuter{
   cursor: pointer;
   width:200px;
+  height: 40px;
   background-color:#FECD57;
   border:1px solid #393a3d;
   border-radius:4px;
@@ -112,16 +115,20 @@
   background: radial-gradient(ellipse at top center, #FECD57, #c68d05);
 }
 
-.categoryButtonOuter:hover{
+.buttonOuter:hover{
   background: radial-gradient(ellipse at top center, #FECD57, #876004);
 }
 
-.categoryButtonInner{
+.buttonInner{
   padding-right:10px;
   padding-left:10px;
 }
 
-.categoryButtonSpan{
+.buttonClicked{
+  background: radial-gradient(ellipse at top center, #FECD57, #7c5804) !important;
+}
+
+.buttonSpan{
   font-size:12px;
   font-family:Arial;
   font-weight:bold;
@@ -150,22 +157,21 @@
   position: absolute;
   width: auto;
   height: auto;
-  border-style: solid;
-  border-radius: 0.2em;
-  border-color: black;
   display: inline-block;
   cursor: pointer;
 }
 
 .scrollButtonLeft{
-  width: 5em;
-  height: 1em;
-  background-color: red;
   float: left;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 .scrollButtonRight{
-  width: 5em;
-  height: 1em;
-  background-color: blue;
   float: right;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.scrollButtonLeft, .scrollButtonRight{
+  width: 100px !important;
+  margin: 0 0 !important;
 }

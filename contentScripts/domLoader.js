@@ -60,29 +60,29 @@ class DOMLoader{
   }
 
   newCategoryButton(keyword){
-    let categoryButtonOuter = document.createElement("div");
-    let categoryButtonInner = document.createElement("div");
-    let categoryButtonSpan = document.createElement("span");
     let commentIcon = document.createElement("div");
-
-    categoryButtonOuter.id = "categoryButtonForWord_" + keyword;
-    categoryButtonOuter.classList.add('categoryButtonOuter');
-    categoryButtonInner.classList.add('categoryButtonInner');
-    categoryButtonSpan.classList.add('categoryButtonSpan');
-    categoryButtonSpan.classList.add('noSelect');
     commentIcon.classList.add('commentIcon');
+    let categoryButton = buttonTemplate((keyword.charAt(0).toUpperCase() + keyword.slice(1)), commentIcon);
+    categoryButton.id = "categoryButtonForWord_" + keyword;
 
-    categoryButtonSpan.textContent = keyword;
-
-    categoryButtonOuter.addEventListener("click", function(){
+    categoryButton.addEventListener("click", function(e){
+      let elem = e.currentTarget;
       let associated_scroller = document.getElementById("scrollerForWord_" + keyword);
       let visibleElems = document.getElementsByClassName('nowVisible');
+      let clickedElems = document.getElementsByClassName('buttonClicked');
 
       for(let i = 0 ; i < visibleElems.length ; i++){
         if(visibleElems[i] != associated_scroller){
           toggleClasses(visibleElems[i], 'nowVisible', 'nowHidden');
         }
       }
+
+      for(let i = 0 ; i < clickedElems.length ; i++){
+        if(clickedElems[i] != elem){
+          clickedElems[i].classList.remove("buttonClicked");
+        }
+      }
+      (elem.classList.contains("buttonClicked") === true) ? elem.classList.remove("buttonClicked") : elem.classList.add("buttonClicked");
 
       if(associated_scroller.classList.contains('nowHidden')){
         toggleClasses(associated_scroller, 'nowHidden', 'nowVisible');
@@ -91,11 +91,7 @@ class DOMLoader{
       }
     })
 
-    categoryButtonInner.appendChild(categoryButtonSpan);
-    categoryButtonOuter.appendChild(commentIcon);
-    categoryButtonOuter.appendChild(categoryButtonInner);
-
-    return categoryButtonOuter;
+    return categoryButton;
   }
 
   addReviews(reviewArr){
