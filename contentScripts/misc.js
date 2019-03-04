@@ -30,8 +30,8 @@ function buttonTemplate(str, node){
   return buttonOuter;
 }
 
-function buttonListener(elem, keyword){
-  let associated_scroller = document.getElementById("scrollerForWord_" + keyword);
+function buttonListener(elem, scroller){
+  let associated_scroller = scroller;
   let visibleElems = document.getElementsByClassName('nowVisible');
   let clickedElems = document.getElementsByClassName('buttonClicked');
 
@@ -53,4 +53,20 @@ function buttonListener(elem, keyword){
   }else{
     toggleClasses(associated_scroller, 'nowVisible', 'nowHidden');
   }
+}
+
+function addTracker(elem){
+    const APPEND_HERE = elem.querySelectorAll(".buttonSpan")[0];
+    const APPEND_ME = document.createElement("span");
+    const STATIC = document.createElement("span");
+    let non_static = document.createElement("span");
+
+    APPEND_ME.classList.add("trackerWrapper");
+    STATIC.classList.add("trackerStatic");
+    non_static.classList.add("trackerNon_static");
+
+    APPEND_ME.appendChild(STATIC);
+    APPEND_ME.appendChild(non_static);
+
+    APPEND_HERE.parentNode.insertBefore(APPEND_ME, APPEND_HERE.nextSibling);
 }
