@@ -5,6 +5,7 @@ class Category{
   constructor(keyword){
     this.index = 0;
     this.heldReviews = [];
+    this.reviewWrapper = document.createElement('div');
     this.reviewHolder = document.createElement('div');
     this.category = keyword;
     this.scroller = this.createScroller();
@@ -24,7 +25,7 @@ class Category{
     staticDisplay.textContent = "Now showing ";
     this.currentDisplay = document.createElement("span");
     this.currentDisplay.classList.add("currentDisplay");
-    this.currentDisplay.textContent = this.index + " of " + this.heldReviews.length;
+    this.currentDisplay.textContent = (this.index+1) + " of " + this.heldReviews.length;
 
     displayWrapper.appendChild(staticDisplay);
     displayWrapper.appendChild(this.currentDisplay);
@@ -37,6 +38,7 @@ class Category{
     scrollButtonRight.addEventListener('click', function(){
       this.scrollRight();
     }.bind(this));
+    this.reviewWrapper.classList.add('reviewWrapper');
     this.reviewHolder.classList.add('reviewHolder');
     this.scrollButton.classList.add('scrollButton');
     scrollButtonLeft.classList.add('scrollButtonLeft');
@@ -47,11 +49,10 @@ class Category{
     scroller.id = "scrollerForWord_" + this.category;
     scroller.classList.add('reviewScroller');
     scroller.classList.add('nowHidden');
-    console.log(displayWrapper);
-    this.reviewHolder.appendChild(displayWrapper);
-    //this.reviewHolder.appendChild(this.scrollButton);
-    scroller.appendChild(this.reviewHolder);
-    console.log(scroller);
+    this.reviewWrapper.appendChild(displayWrapper);
+    this.reviewWrapper.appendChild(this.scrollButton);
+    this.reviewWrapper.appendChild(this.reviewHolder);
+    scroller.appendChild(this.reviewWrapper);
     return scroller;
   }
 
@@ -86,20 +87,18 @@ class Category{
   }
 
   displayContent() {
-    this.currentDisplay.textContent = this.index + " of " + this.heldReviews.length;
+    this.currentDisplay.textContent = (this.index+1) + " of " + this.heldReviews.length;
 
     let tempDiv = document.createElement('div');
     let currentReview = this.heldReviews[this.index];
     if(typeof currentReview === "string"){
-      tempDiv.innerHTML = this.heldReviews[this.index];
+      tempDiv.innerHTML = currentReview;
     }else{
-      tempDiv.innerHTML = this.heldReviews[this.index].innerHTML;
+      tempDiv.innerHTML = currentReview.innerHTML;
     }
     let text = tempDiv.querySelectorAll(".review-text")[0].outerHTML;
     tempDiv.querySelectorAll(".review-text")[0].outerHTML = "";
     this.reviewHolder.innerHTML = tempDiv.innerHTML + text;
-    this.reviewHolder.firstChild.style.marginTop = "40px";
-    this.reviewHolder.insertBefore(this.scrollButton, this.reviewHolder.firstChild);
   }
 
   scrollLeft(){
@@ -117,6 +116,7 @@ class Category{
   }
 
   addReview(review) {
+    this.currentDisplay.textContent = (this.index+1) + " of " + (this.heldReviews.length+1);
     this.heldReviews.push(review);
     this.buttonReviewNum.textContent = this.heldReviews.length;
     if(this.heldReviews.length == 1){

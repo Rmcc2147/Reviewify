@@ -84,17 +84,20 @@
   margin: 0 auto;
 }
 
-.reviewHolder{
-  transform: scale(0.9);
+.reviewWrapper{
   border-style: solid;
   border-radius: 0.2em;
   border-color: black;
   display: inline-block;
+  margin: 0 auto;
   padding: 1em;
-  width: 100%;
+  width: 50%;
   height: inherit;
-  overflow: scroll;
   background-color: white;
+}
+
+.reviewHolder{
+  transform: scale(0.9);
 }
 
 .nowHidden{
