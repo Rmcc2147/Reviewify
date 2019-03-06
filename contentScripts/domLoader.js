@@ -5,13 +5,14 @@ class DOMLoader{
     this.url = location.url;
     this.dom;
     this.categories = [];
-    this.scrollers = [];
+    this.catObjs = [];
     this.loadingBar;
   }
 
   loadDOM(){
     this.dom = document.createElement('div');
     this.dom.id = "outerDiv";
+    this.dom.classList.add("noSelect");
 
     let categoryHolder = document.createElement('div');
     categoryHolder.id = "categoryHolder";
@@ -33,9 +34,9 @@ class DOMLoader{
 
   appendReview(reviewJSON){
     for (let i = 0; i < reviewJSON.keywords.length; i++) {
-      for (let j = 0; j < this.scrollers.length; j++) {
-        if(this.scrollers[j].category == reviewJSON.keywords[i]){
-          this.scrollers[j].addReview(reviewJSON.review);
+      for (let j = 0; j < this.catObjs.length; j++) {
+        if(this.catObjs[j].category == reviewJSON.keywords[i]){
+          this.catObjs[j].addReview(reviewJSON.review);
         }
       }
     }
@@ -50,26 +51,12 @@ class DOMLoader{
   newCategory(keyword){
     this.categories.push(keyword);
 
-    let newCatBut = this.newCategoryButton(keyword);
-    let newScroller = new Scroller(keyword)
-    this.scrollers.push(newScroller);
+    let newCategory = new Category(keyword)
+    this.catObjs.push(newCategory);
 
-    this.dom.querySelectorAll("#categoryHolder")[0].appendChild(newCatBut);
-    newScroller.appendScroller(this.dom.querySelectorAll("#scrollerHolder")[0])
+    this.dom.querySelectorAll("#categoryHolder")[0].appendChild(newCategory.categoryButton);
+    this.dom.querySelectorAll("#scrollerHolder")[0].appendChild(newCategory.scroller);
 
-  }
-
-  newCategoryButton(keyword){
-    let commentIcon = document.createElement("div");
-    commentIcon.classList.add('commentIcon');
-    let categoryButton = buttonTemplate((keyword.charAt(0).toUpperCase() + keyword.slice(1)), commentIcon);
-    categoryButton.id = "categoryButtonForWord_" + keyword;
-
-    categoryButton.addEventListener("click", function(e){
-      buttonListener(e.currentTarget, keyword)
-    }.bind(this));
-
-    return categoryButton;
   }
 
   addReviews(reviewArr){
@@ -135,7 +122,12 @@ class LoadingBar{
   }
 
   getReviewNum(){
-    let num_with_string = document.getElementById("acrCustomerReviewText").textContent;
+    let num_with_string = document.getElementById("acrCustomerReviewText");
+    if(!num_with_string){
+      num_with_string = document.getElementsByClassName("a-link-emphasis")[0].textContent;
+    }else{
+      num_with_string = num_with_string.textContent;
+    }
     let num = parseFloat(num_with_string.replace(/\D/g,''));
     num = Math.ceil(num/10)*8;
     return num

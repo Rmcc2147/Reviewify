@@ -84,17 +84,20 @@
   margin: 0 auto;
 }
 
-.reviewHolder{
-  transform: scale(0.9);
+.reviewWrapper{
   border-style: solid;
   border-radius: 0.2em;
   border-color: black;
   display: inline-block;
+  margin: 0 auto;
   padding: 1em;
-  width: 100%;
+  width: 50%;
   height: inherit;
-  overflow: scroll;
   background-color: white;
+}
+
+.reviewHolder{
+  transform: scale(0.9);
 }
 
 .nowHidden{
@@ -126,6 +129,7 @@
 .buttonInner{
   padding-right:10px;
   padding-left:10px;
+  margin-top: -10px;
 }
 
 .buttonClicked{
@@ -186,4 +190,14 @@
 .scrollButtonLeft, .scrollButtonRight{
   width: 100px !important;
   margin: 0 0 !important;
+}
+
+.trackerWrapper {
+  font-size: 8pt;
+  font-family:Arial;
+  font-weight: bold;
+  color:#333333;
+  white-space:nowrap;
+  display:block;
+  text-align:center;
 }

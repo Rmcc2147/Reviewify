@@ -28,7 +28,7 @@
           "contentScripts/keyWords.js",
           "contentScripts/misc.js",
           "contentScripts/request.js",
-          "contentScripts/scroller.js",
+          "contentScripts/category.js",
           "contentScripts/init.js"
         ],
         "css":[

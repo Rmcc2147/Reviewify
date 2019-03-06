@@ -11,17 +11,17 @@ chrome.runtime.sendMessage({activeStatusRequest: "status_request"}, function(res
 
 function IsAmazonFirstProductPage(elem){
   let urlPath = location.pathname;
-  if(urlPath.includes("/dp/") || urlPath.includes("/gp/")){
-    return true;
-  }else{
+  if((!urlPath.includes("/dp/") && !urlPath.includes("/gp/")) || document.getElementsByClassName("a-link-emphasis")[0] == null){
     return false;
+  }else{
+    return true;
   }
 }
 
 async function init(){
 
   if(!IsAmazonFirstProductPage(document)){
-    return console.log("Not an amazon product page.");
+    return console.log("No reviews to be found.");
   }
 
   const STORER = new StorageAccess(location.host + location.pathname);
