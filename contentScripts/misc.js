@@ -9,6 +9,18 @@ function toggleClasses(elem, remove, add){
   elem.classList.add(add);
 }
 
+function toggleClasses_all(elem, className){
+  let allElems = document.getElementsByClassName(className);
+
+  for (let i = 0; i < allElems.length; i++) {
+    if(allElems[i] != elem){
+      allElems[i].classList.remove(className);
+    }
+  }
+
+  (elem.classList.contains(className) == true) ? elem.classList.remove(className) : elem.classList.add(className)
+}
+
 function buttonTemplate(str, node){
   let buttonOuter = document.createElement("div");
   let buttonInner = document.createElement("div");
@@ -41,12 +53,7 @@ function buttonListener(elem, keyword){
     }
   }
 
-  for(let i = 0 ; i < clickedElems.length ; i++){
-    if(clickedElems[i] != elem){
-      clickedElems[i].classList.remove("buttonClicked");
-    }
-  }
-  (elem.classList.contains("buttonClicked") === true) ? elem.classList.remove("buttonClicked") : elem.classList.add("buttonClicked");
+  toggleClasses_all(elem, "buttonClicked");
 
   if(associated_scroller.classList.contains('nowHidden')){
     toggleClasses(associated_scroller, 'nowHidden', 'nowVisible');
