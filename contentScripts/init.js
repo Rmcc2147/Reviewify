@@ -25,7 +25,7 @@ async function init(){
   }
 
   const STORER = new StorageAccess(location.host + location.pathname);
-  let storedData = await STORER.getDataFromStorage();
+  let storedData;// = await STORER.getDataFromStorage();
   let domLoader = new DOMLoader();
 
   domLoader.loadDOM();
@@ -51,6 +51,7 @@ async function init(){
 
         domLoader.addReviews(reviewContent);
       }
+      console.log(REVIEW_PARSER.mostCommon(REVIEW_PARSER.wordFreqAll));
 
       STORER.setReviews(allReviews);
       break;
