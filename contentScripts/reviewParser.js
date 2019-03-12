@@ -13,9 +13,8 @@ class ReviewParser{
 
   getReviewContent(review){
     review.title = review.review.querySelectorAll(".review-title")[0].textContent;
-    review.text = review.review.querySelectorAll(".review-text")[0].textContent;
-    review.keywords = this.getKeywords(review.text);
-
+    review.text = review.review.querySelectorAll(".review-text")[0].textContent.replace(/[^a-zA-Z ]/g, "").removeStopWords();
+    review.keywords = this.match(review.text, this.getKeywords(review.text));
     return review;
   }
 
@@ -25,25 +24,31 @@ class ReviewParser{
     if(text.length == 0){
       return ['none'];
     }
-    let parsedText = text.replace(/[^a-zA-Z ]/g, "").removeStopWords();
 
-    let textArr = parsedText.split(" ");
+    let textArr = text.split(" ");
 
     for (let i = 0; i < textArr.length; i++) {
-
+      let added = false;
       let word = textArr[i];
+      let key = word;
 
       if(word === ""){continue};
 
-      if(!this.wordFreqAll[word]){
+      let keys = Object.keys(this.wordFreqAll);
+      for(let i = 0 ; i < keys.length ; i++){
+        if(this.isSimilar(word, keys[i])){//// IDEA: check out php's similar_text function
+          added = true;
+          key = keys[i];
+        }
+      }
+      if(!this.wordFreqAll[word] && added === false){
         this.wordFreqAll[word] = 1;
       }else{
-        this.wordFreqAll[word]++;
+        this.wordFreqAll[key]++;
       }
     }
 
-    let keywords = parsedText.sortByKeyWords();
-    console.log(this.mostCommon(this.wordFreqAll));
+    let keywords = text.sortByKeyWords();
     return this.mostCommon(this.wordFreqAll);
   }
 
@@ -61,22 +66,28 @@ class ReviewParser{
       return b[1] - a[1];
     })
 
-    return arr.slice(0, 20).map(x => x[0]);
+    //return arr.slice(0, 20).map(x => x[0]);
+    return arr.map(x => x[0]);
   }
 
   match(text, array){
     let wordsToMatch = text.split(" ");
+    let matched = [];
 
     for(let i = 0; i < wordsToMatch.length ; i++){
       for(let j = 0 ; j < array.length ; j++){
-        if(isSimilar(wordsToMatch[i], array[j]){
-
+        if(this.isSimilar(wordsToMatch[i], array[j]) && !matched.includes(array[j])){
+          matched.push(array[j]);
         }
       }
     }
+    if(matched.length != 0){
+      return matched;
+    }else{return ['none'];}
   }
 
   isSimilar(str1, str2){
-    //https://github.com/cemerick/jsdifflib check this out
+    let statement = (str1 === str2 || str1.includes(str2) || str2.includes(str1));
+    if(statement){return true;}else{return false;}
   }
 }

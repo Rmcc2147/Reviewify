@@ -9,6 +9,7 @@
 }
 
 #outerDiv{
+  overflow: scroll;
   bottom: 0;
   position: fixed;
   width: 100%;
@@ -20,7 +21,6 @@
   border-color: #FECD57;
   background-color: rgba(0, 0, 0, 0.9);
   background: radial-gradient(ellipse at top center, rgba(57, 58, 61, 0.9), rgba(0, 0, 0, 0.9))
-  overflow: hidden;
 }
 
 #outerDiv, #drag_resize{

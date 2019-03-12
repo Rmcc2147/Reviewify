@@ -22,6 +22,7 @@ String.prototype.removeStopWords = function() {
         'also',
         'although',
         'always',
+        'am',
         'among',
         'an',
         'and',
@@ -439,7 +440,8 @@ String.prototype.removeStopWords = function() {
     )
 
     // Split out all the individual words in the phrase
-    words = cleansed_string.match(/[^\s]+|\s+[^\s+]$/g)
+    words = cleansed_string.match(/[^\s]+|\s+[^\s+]$/g);
+    if(words == null){return ""};
 
     // Review all the words
     for(x=0; x < words.length; x++) {

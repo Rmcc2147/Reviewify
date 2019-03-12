@@ -32,12 +32,10 @@ class DOMLoader{
     document.body.appendChild(this.dom);
   }
 
-  appendReview(reviewJSON){
-    for (let i = 0; i < reviewJSON.keywords.length; i++) {
-      for (let j = 0; j < this.catObjs.length; j++) {
-        if(this.catObjs[j].category == reviewJSON.keywords[i]){
-          this.catObjs[j].addReview(reviewJSON.review);
-        }
+  appendReview(reviewJSON, keyword){
+    for(let j = 0; j < this.catObjs.length; j++) {
+      if(this.catObjs[j].category == keyword){
+        this.catObjs[j].addReview(reviewJSON.review);
       }
     }
   }
@@ -74,7 +72,7 @@ class DOMLoader{
           this.newCategory(keyword);
         }
 
-        this.appendReview(reviewArr[i]);
+        this.appendReview(reviewArr[i], keyword);
       }
     }
   }
