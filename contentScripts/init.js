@@ -50,14 +50,15 @@ async function init(){
         }
 
         domLoader.addReviews(reviewContent);
+        domLoader.reorderReviews();
       }
-      console.log(REVIEW_PARSER.mostCommon(REVIEW_PARSER.wordFreqAll));
 
       STORER.setReviews(allReviews);
       break;
 
     default:
       domLoader.addReviews(storedData.reviews);
+      domLoader.reorderReviews();
   }
 
 }

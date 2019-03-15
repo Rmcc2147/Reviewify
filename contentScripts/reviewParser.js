@@ -21,10 +21,6 @@ class ReviewParser{
   getKeywords(text){
     let wordFreq = {};
 
-    if(text.length == 0){
-      return ['none'];
-    }
-
     let textArr = text.split(" ");
 
     for (let i = 0; i < textArr.length; i++) {
@@ -32,7 +28,7 @@ class ReviewParser{
       let word = textArr[i];
       let key = word;
 
-      if(word === ""){continue};
+      if(word.length < 4){continue};
 
       let keys = Object.keys(this.wordFreqAll);
       for(let i = 0 ; i < keys.length ; i++){
@@ -66,7 +62,6 @@ class ReviewParser{
       return b[1] - a[1];
     })
 
-    //return arr.slice(0, 20).map(x => x[0]);
     return arr.map(x => x[0]);
   }
 
@@ -87,7 +82,7 @@ class ReviewParser{
   }
 
   isSimilar(str1, str2){
-    let statement = (str1 === str2 || str1.includes(str2) || str2.includes(str1));
+    let statement = (str1 === str2 || str1.includes(str2));
     if(statement){return true;}else{return false;}
   }
 }

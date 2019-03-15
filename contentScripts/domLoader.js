@@ -76,6 +76,22 @@ class DOMLoader{
       }
     }
   }
+
+  reorderReviews(){
+    this.dom.querySelectorAll("#categoryHolder")[0].innerHTML = "";
+    this.dom.querySelectorAll("#scrollerHolder")[0].innerHTML = "";
+
+    this.catObjs.sort(function(a, b){
+      return b.heldReviews.length - a.heldReviews.length;
+    });
+
+    for(let i = 0 ; i < 10 ; i++){
+      this.dom.querySelectorAll("#categoryHolder")[0].appendChild(this.catObjs[i].categoryButton);
+      this.dom.querySelectorAll("#scrollerHolder")[0].appendChild(this.catObjs[i].scroller);
+    }
+
+
+  }
 }
 
 function makeResizable(elem){
@@ -105,7 +121,7 @@ function makeResizable(elem){
 
   function stopResize(e){
     RESIZER.classList.remove("buttonClicked");
-    window.removeEventListener('mousemove', resize)
+    window.removeEventListener('mousemove', resize);
   }
 }
 
@@ -114,9 +130,9 @@ class LoadingBar{
     this.totalReviews = this.getReviewNum();
     this.reviewsFound = 0;
     this.wrapper = this.makeBar();
-    this.loadingBar;
+    this.loadingCircle;
     this.percentageDone;
-    this.backgroundBar;
+    this.displayedText;
   }
 
   getReviewNum(){
@@ -134,12 +150,15 @@ class LoadingBar{
   makeBar(){
     let wrapper = document.createElement('div');
     wrapper.id = "loadingBar_wrapper";
-    this.loadingBar = document.createElement('div');
-    this.loadingBar.id = "loadingBar";
-    this.backgroundBar = document.createElement('div');
-    this.backgroundBar.id = "backgroundBar";
-    wrapper.appendChild(this.backgroundBar);
-    wrapper.appendChild(this.loadingBar);
+
+    this.loadingCircle = document.createElement('div');
+    this.loadingCircle.id = "loadingCircle";
+    wrapper.appendChild(this.loadingCircle);
+
+    this.displayedText = document.createElement('div');
+    this.displayedText.id = "displayedText";
+    this.displayedText.textContent = "0.0%";
+    wrapper.appendChild(this.displayedText);
 
     this.displayContent();
 
@@ -148,8 +167,7 @@ class LoadingBar{
 
   displayContent(){
     this.percentageDone = (this.reviewsFound/this.totalReviews)*100;
-    this.loadingBar.textContent = this.percentageDone.toFixed(1) + "%";
-    this.loadingBar.style.width = this.percentageDone.toFixed(1) + "%";
+    this.displayedText.textContent = this.percentageDone.toFixed(1) + "%";
   }
 
   incrementProgress(){
@@ -161,6 +179,7 @@ class LoadingBar{
   }
 
   async removeBar(){
+    this.displayedText.textContent = "100%";
     setTimeout(function(){
       this.wrapper.remove();
     }.bind(this), 2500);
