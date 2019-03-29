@@ -39,7 +39,8 @@ class ReviewGrabber{
           "review": doc_reviews[i],
           "title": null,
           "text": null,
-          "keywords": null
+          "keywords": null,
+          "stars": null
         };
         reviews.push(reviewJSON);
         this.allReviews.push(reviewJSON);

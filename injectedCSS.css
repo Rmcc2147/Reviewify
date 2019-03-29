@@ -22,8 +22,17 @@
   background: radial-gradient(ellipse at top center, rgba(57, 58, 61, 0.9), rgba(0, 0, 0, 0.9));
 }
 
+#outerDiv>::-webkit-scrollbar {
+    display: none;
+}
+
 #outerDiv, #drag_resize{
   box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.5);
+}
+
+#outerWrapper{
+  height: 1000px;
+  overflow-y: scroll;
 }
 
 #categoryHolder{
@@ -108,13 +117,13 @@
 
 .buttonOuter{
   cursor: pointer;
-  width:200px;
-  height: 40px;
+  width:300px;
+  height: 60px;
   background-color:#FECD57;
   border:1px solid #393a3d;
-  border-radius:4px;
+  border-radius:6px;
   padding:10px;
-  margin:10px 5px;
+  margin:15px 8px;
   display: inline-block;
   background: radial-gradient(ellipse at top center, #FECD57, #c68d05);
   transition: all .2s ease-in-out;
@@ -136,7 +145,7 @@
 }
 
 .buttonSpan{
-  font-size: 12px;
+  font-size: 18px;
   font-family:Arial;
   font-weight: bold;
   color:#333333;
@@ -146,8 +155,8 @@
 }
 
 .commentIcon{
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   float:left;
   background-image: url('chrome-extension://__MSG_@@extension_id__/images/comment_icon.jpg');
   background-repeat: no-repeat;
@@ -162,7 +171,6 @@
 .reviewScroller {
   width: 100%;
   height: inherit;
-  position: absolute;
 }
 
 .scrollButton {

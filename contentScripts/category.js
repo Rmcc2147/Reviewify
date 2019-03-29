@@ -12,7 +12,9 @@ class Category{
     this.scrollButton;
     this.categoryButton = this.createCatBut();
     this.buttonReviewNum;
+    this.ratingElem;
     this.currentDisplay;
+    this.totalStars = 0;
   }
 
   createScroller() {
@@ -63,9 +65,13 @@ class Category{
     categoryButton.id = "categoryButtonForWord_" + this.category;
 
     addTracker(categoryButton);
+    addTracker(categoryButton);
     categoryButton.querySelectorAll(".trackerStatic")[0].textContent = "Instances found: ";
     this.buttonReviewNum = categoryButton.querySelectorAll(".trackerNon_static")[0];
     this.buttonReviewNum.textContent = "0";
+    categoryButton.querySelectorAll(".trackerStatic")[1].textContent = "Average rating: ";
+    this.ratingElem = categoryButton.querySelectorAll(".trackerNon_static")[1];
+    this.ratingElem.textContent = "0";
 
     categoryButton.addEventListener("click", function(e){
       buttonListener(e.currentTarget, this.scroller)
@@ -115,10 +121,12 @@ class Category{
     }
   }
 
-  addReview(review) {
+  addReview(review, stars) {
     this.currentDisplay.textContent = (this.index+1) + " of " + (this.heldReviews.length+1);
     this.heldReviews.push(review);
+    this.totalStars += stars;
     this.buttonReviewNum.textContent = this.heldReviews.length;
+    this.ratingElem.textContent = Math.round((this.totalStars/this.heldReviews.length)*10)/10;
     if(this.heldReviews.length == 1){
       this.displayContent();
     }

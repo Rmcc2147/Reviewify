@@ -14,6 +14,8 @@ class DOMLoader{
     this.dom.id = "outerDiv";
     this.dom.classList.add("noSelect");
 
+    let outerWrapper = document.createElement('div');
+    outerWrapper.id = "outerWrapper";
     let categoryHolder = document.createElement('div');
     categoryHolder.id = "categoryHolder";
     let scrollerHolder = document.createElement('div');
@@ -24,8 +26,10 @@ class DOMLoader{
     drag_resize.id = "drag_resize";
 
     this.dom.appendChild(drag_resize);
-    this.dom.appendChild(categoryHolder);
-    this.dom.appendChild(scrollerHolder);
+    outerWrapper.appendChild(categoryHolder);
+    outerWrapper.appendChild(scrollerHolder);
+
+    this.dom.appendChild(outerWrapper);
 
     makeResizable(this.dom);
 
@@ -35,15 +39,15 @@ class DOMLoader{
   appendReview(reviewJSON, keyword){
     for(let j = 0; j < this.catObjs.length; j++) {
       if(this.catObjs[j].category == keyword){
-        this.catObjs[j].addReview(reviewJSON.review);
+        this.catObjs[j].addReview(reviewJSON.review, reviewJSON.stars);
       }
     }
   }
 
   createLoadingBar(){
     this.loadingBar = new LoadingBar();
-    const INSERT_HERE = this.dom.querySelectorAll("#drag_resize")[0];
-    this.dom.insertBefore(this.loadingBar.wrapper, INSERT_HERE.nextSibling);
+    const INSERT_HERE = this.dom.children[1].firstChild;
+    this.dom.children[1].insertBefore(this.loadingBar.wrapper, INSERT_HERE);
   }
 
   newCategory(keyword){

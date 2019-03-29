@@ -15,6 +15,7 @@ class ReviewParser{
     review.title = review.review.querySelectorAll(".review-title")[0].textContent;
     review.text = review.review.querySelectorAll(".review-text")[0].textContent.replace(/[^a-zA-Z ]/g, "").removeStopWords();
     review.keywords = this.match(review.text, this.getKeywords(review.text));
+    review.stars = this.getStarRating(review.review);
     return review;
   }
 
@@ -84,5 +85,9 @@ class ReviewParser{
   isSimilar(str1, str2){
     let statement = (str1 === str2 || str1.includes(str2));
     if(statement){return true;}else{return false;}
+  }
+
+  getStarRating(elem){
+    return parseInt(elem.querySelectorAll(".a-icon-alt")[0].textContent[0]);
   }
 }
