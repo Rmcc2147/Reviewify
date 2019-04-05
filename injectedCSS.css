@@ -22,7 +22,7 @@
   background: radial-gradient(ellipse at top center, rgba(57, 58, 61, 0.9), rgba(0, 0, 0, 0.9));
 }
 
-#outerDiv>::-webkit-scrollbar {
+.hideScroll>::-webkit-scrollbar{
     display: none;
 }
 
@@ -33,10 +33,13 @@
 #outerWrapper{
   height: 1000px;
   overflow-y: scroll;
+  display: inline-block;
 }
 
 #categoryHolder{
   display: inline-block;
+  float: left;
+  width: 49%;
 }
 
 #drag_resize{
@@ -98,9 +101,10 @@
   display: inline-block;
   margin: 0 auto;
   padding: 1em;
-  width: 50%;
-  height: inherit;
   background-color: white;
+  height: 50%;
+  width: 100%;
+  overflow-y: scroll;
 }
 
 .reviewHolder{
@@ -166,6 +170,8 @@
 
 #scrollerHolder{
   height: inherit;
+  float: right;
+  width: 50%;
 }
 
 .reviewScroller {

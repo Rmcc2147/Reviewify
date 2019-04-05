@@ -41,6 +41,7 @@ class Category{
       this.scrollRight();
     }.bind(this));
     this.reviewWrapper.classList.add('reviewWrapper');
+    this.reviewWrapper.classList.add('hideScroll');
     this.reviewHolder.classList.add('reviewHolder');
     this.scrollButton.classList.add('scrollButton');
     scrollButtonLeft.classList.add('scrollButtonLeft');

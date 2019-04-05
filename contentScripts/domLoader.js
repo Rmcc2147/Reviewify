@@ -13,6 +13,7 @@ class DOMLoader{
     this.dom = document.createElement('div');
     this.dom.id = "outerDiv";
     this.dom.classList.add("noSelect");
+    this.dom.classList.add("hideScroll");
 
     let outerWrapper = document.createElement('div');
     outerWrapper.id = "outerWrapper";
