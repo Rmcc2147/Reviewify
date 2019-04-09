@@ -33,7 +33,7 @@ class ReviewParser{
 
       let keys = Object.keys(this.wordFreqAll);
       for(let i = 0 ; i < keys.length ; i++){
-        if(this.isSimilar(word, keys[i])){//// IDEA: check out php's similar_text function
+        if(this.isSimilar(word, keys[i])){
           added = true;
           key = keys[i];
         }

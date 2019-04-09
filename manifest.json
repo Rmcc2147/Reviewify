@@ -20,6 +20,7 @@
         "js": [
           "libraries/mozPolyfill/browser-polyfill.js",
           "libraries/nlp/removeStopWords.js",
+          "contentScripts/searchBar.js",
           "contentScripts/domLoader.js",
           "contentScripts/storageAccess.js",
           "contentScripts/reviewParser.js",

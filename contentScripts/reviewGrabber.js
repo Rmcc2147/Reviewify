@@ -2,10 +2,19 @@
 
 class ReviewGrabber{
   constructor(){
-    this.url = document.getElementsByClassName("a-link-emphasis")[0].href;
+    this.url = this.getCorrectUrl();
     this.parser = new DOMParser();
     this.allReviews = [];
     this.doc;
+  }
+
+  getCorrectUrl(){
+    let elems = document.getElementsByClassName("a-link-emphasis");
+    for (let i = 0; i < elems.length; i++) {
+      if(elems[i].textContent.includes("review")){
+        return elems[i].href;
+      }
+    }
   }
 
   isGood(str){

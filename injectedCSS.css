@@ -168,10 +168,15 @@
   border-radius: 0.2em;;
 }
 
-#scrollerHolder{
+#scrollerHolder, #searchHolder{
+  position:absolute;
   height: inherit;
-  float: right;
+  right: 0;
   width: 50%;
+}
+
+#searchBar:hover{
+  background: radial-gradient(ellipse at top center, #FECD57, #c68d05);
 }
 
 .reviewScroller {

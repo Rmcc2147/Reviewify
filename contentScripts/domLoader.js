@@ -4,9 +4,11 @@ class DOMLoader{
   constructor(){
     this.url = location.url;
     this.dom;
+    this.reviews = [];
     this.categories = [];
     this.catObjs = [];
     this.loadingBar;
+    this.searchBar;
   }
 
   loadDOM(){
@@ -19,22 +21,32 @@ class DOMLoader{
     outerWrapper.id = "outerWrapper";
     let categoryHolder = document.createElement('div');
     categoryHolder.id = "categoryHolder";
+    let categoryHolderInner = document.createElement('div');
+    categoryHolderInner.id = "categoryHolderInner";
     let scrollerHolder = document.createElement('div');
     scrollerHolder.id = "scrollerHolder";
+    let searchHolder = document.createElement('div');
+    searchHolder.id = "searchHolder";
 
     let drag_resize = document.createElement('div');
     drag_resize.textContent = "^";
     drag_resize.id = "drag_resize";
 
     this.dom.appendChild(drag_resize);
+    categoryHolder.appendChild(categoryHolderInner);
     outerWrapper.appendChild(categoryHolder);
     outerWrapper.appendChild(scrollerHolder);
+    outerWrapper.appendChild(searchHolder);
 
     this.dom.appendChild(outerWrapper);
 
     makeResizable(this.dom);
 
     document.body.appendChild(this.dom);
+    this.searchBar = new SearchBar(this);
+    this.searchBar.input.addEventListener("change", this.searchBar.onChange.bind(this));
+    categoryHolder.insertBefore(this.searchBar.reviewBox, categoryHolder.firstChild);
+    categoryHolder.insertBefore(this.searchBar.base, categoryHolder.firstChild);
   }
 
   appendReview(reviewJSON, keyword){
@@ -57,13 +69,13 @@ class DOMLoader{
     let newCategory = new Category(keyword)
     this.catObjs.push(newCategory);
 
-    this.dom.querySelectorAll("#categoryHolder")[0].appendChild(newCategory.categoryButton);
+    this.dom.querySelectorAll("#categoryHolderInner")[0].appendChild(newCategory.categoryButton);
     this.dom.querySelectorAll("#scrollerHolder")[0].appendChild(newCategory.scroller);
 
   }
 
   addReviews(reviewArr){
-
+    this.reviews = reviewArr;
     if(typeof this.loadingBar == "object"){
       this.loadingBar.incrementProgress();
     }
@@ -83,7 +95,7 @@ class DOMLoader{
   }
 
   reorderReviews(){
-    this.dom.querySelectorAll("#categoryHolder")[0].innerHTML = "";
+    this.dom.querySelectorAll("#categoryHolderInner")[0].innerHTML = "";
     this.dom.querySelectorAll("#scrollerHolder")[0].innerHTML = "";
 
     this.catObjs.sort(function(a, b){
@@ -91,7 +103,7 @@ class DOMLoader{
     });
 
     for(let i = 0 ; i < 10 ; i++){
-      this.dom.querySelectorAll("#categoryHolder")[0].appendChild(this.catObjs[i].categoryButton);
+      this.dom.querySelectorAll("#categoryHolderInner")[0].appendChild(this.catObjs[i].categoryButton);
       this.dom.querySelectorAll("#scrollerHolder")[0].appendChild(this.catObjs[i].scroller);
     }
 

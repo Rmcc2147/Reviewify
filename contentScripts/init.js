@@ -48,7 +48,6 @@ async function init(){
         for (let i = 0; i < reviewContent.length; i++) {
           allReviews.reviews.push(reviewContent[i]);
         }
-
         domLoader.addReviews(reviewContent);
         domLoader.reorderReviews();
       }
