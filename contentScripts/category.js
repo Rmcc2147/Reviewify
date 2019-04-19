@@ -32,28 +32,51 @@ class Category{
     displayWrapper.appendChild(staticDisplay);
     displayWrapper.appendChild(this.currentDisplay);
 
-    let scrollButtonLeft = buttonTemplate("Left");
+    let scrollButtonLeft = document.createElement("div");
     scrollButtonLeft.addEventListener('click', function(){
       this.scrollLeft();
     }.bind(this));
-    let scrollButtonRight = buttonTemplate("Right");
+    let scrollButtonRight = document.createElement("div");
     scrollButtonRight.addEventListener('click', function(){
       this.scrollRight();
     }.bind(this));
+
+    let reorderAscending = document.createElement('div');
+    reorderAscending.classList.add("reorderAscending");
+    reorderAscending.classList.add("arrow");
+    //reorderAscending.textContent = "Sort Ascending";
+    reorderAscending.addEventListener('click', this.sortAscending.bind(this));
+    let reorderDescending = document.createElement('div');
+    reorderDescending.classList.add("reorderDescending");
+    reorderDescending.classList.add("arrow");
+    //reorderDescending.textContent = "Sort Descending";
+    reorderDescending.addEventListener('click', this.sortDescending.bind(this));
+    let reorderWrapper = document.createElement('div');
+    reorderWrapper.classList.add("reorderWrapper");
+    reorderWrapper.appendChild(reorderAscending);
+    reorderWrapper.appendChild(reorderDescending);
+
     this.reviewWrapper.classList.add('reviewWrapper');
     this.reviewWrapper.classList.add('hideScroll');
     this.reviewHolder.classList.add('reviewHolder');
     this.scrollButton.classList.add('scrollButton');
     scrollButtonLeft.classList.add('scrollButtonLeft');
     scrollButtonRight.classList.add('scrollButtonRight');
+    scrollButtonLeft.classList.add('arrow');
+    scrollButtonRight.classList.add('arrow');
     this.scrollButton.appendChild(scrollButtonLeft);
     this.scrollButton.appendChild(scrollButtonRight);
+
+    let buttonWrapper = document.createElement("div");
+    buttonWrapper.classList.add("buttonWrapper");
+    buttonWrapper.appendChild(this.scrollButton);
+    buttonWrapper.appendChild(reorderWrapper);
 
     scroller.id = "scrollerForWord_" + this.category;
     scroller.classList.add('reviewScroller');
     scroller.classList.add('nowHidden');
     this.reviewWrapper.appendChild(displayWrapper);
-    this.reviewWrapper.appendChild(this.scrollButton);
+    this.reviewWrapper.appendChild(buttonWrapper);
     this.reviewWrapper.appendChild(this.reviewHolder);
     scroller.appendChild(this.reviewWrapper);
     return scroller;
@@ -94,18 +117,25 @@ class Category{
   }
 
   displayContent() {
-    this.currentDisplay.textContent = (this.index+1) + " of " + this.heldReviews.length;
+    switch(this.heldReviews.length){
+      case(0):
+        this.currentDisplay.textContent = "0 of 0";
+        this.reviewHolder.innerHTML = "no reviews to be found";
+        break;
+      default:
+      this.currentDisplay.textContent = (this.index+1) + " of " + this.heldReviews.length;
 
-    let tempDiv = document.createElement('div');
-    let currentReview = this.heldReviews[this.index];
-    if(typeof currentReview === "string"){
-      tempDiv.innerHTML = currentReview;
-    }else{
-      tempDiv.innerHTML = currentReview.innerHTML;
+      let tempDiv = document.createElement('div');
+      let currentReview = this.heldReviews[this.index][0];
+      if(typeof currentReview === "string"){
+        tempDiv.innerHTML = currentReview;
+      }else{
+        tempDiv.innerHTML = currentReview.innerHTML;
+      }
+      let text = tempDiv.querySelectorAll(".review-text")[0].outerHTML;
+      tempDiv.querySelectorAll(".review-text")[0].outerHTML = "";
+      this.reviewHolder.innerHTML = tempDiv.innerHTML + text;
     }
-    let text = tempDiv.querySelectorAll(".review-text")[0].outerHTML;
-    tempDiv.querySelectorAll(".review-text")[0].outerHTML = "";
-    this.reviewHolder.innerHTML = tempDiv.innerHTML + text;
   }
 
   scrollLeft(){
@@ -122,9 +152,25 @@ class Category{
     }
   }
 
+  sortAscending(){
+    this.heldReviews.sort(function(a, b){
+      return b[1] - a[1];
+    });
+    this.index = 0;
+    this.displayContent();
+  }
+
+  sortDescending(){
+    this.heldReviews.sort(function(a, b){
+      return a[1] - b[1];
+    });
+    this.index = 0;
+    this.displayContent();
+  }
+
   addReview(review, stars) {
     this.currentDisplay.textContent = (this.index+1) + " of " + (this.heldReviews.length+1);
-    this.heldReviews.push(review);
+    this.heldReviews.push([review, stars]);
     this.totalStars += stars;
     this.buttonReviewNum.textContent = this.heldReviews.length;
     this.ratingElem.textContent = Math.round((this.totalStars/this.heldReviews.length)*10)/10;

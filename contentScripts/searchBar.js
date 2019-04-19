@@ -28,8 +28,14 @@ class SearchBar{
     }.bind(this));
   }
 
+
+  //this functions context is binded to domLoader
   onChange(e){
     document.getElementById("reviewBox").innerHTML = "";
+    if(document.getElementById("scrollerForWord_###search###").classList.contains("nowVisible")){
+      toggleClasses(document.getElementById("scrollerForWord_###search###"), "nowVisible", "nowHidden");
+    }
+
     let catHolder = this.dom.querySelectorAll("#categoryHolderInner")[0];
     let scrollHolder = this.dom.querySelectorAll("#scrollerHolder")[0];
     let val = e.currentTarget.value;
@@ -68,11 +74,14 @@ class SearchBar{
     for(let i = 0 ; i < this.domLoader.reviews.length ; i++){
       let review = this.domLoader.reviews[i];
       if(review.text.includes(val)){
-        reviewsToDisplay.push(review.review);
+        reviewsToDisplay.push([review.review, review.stars]);
       }
     }
     if(reviewsToDisplay.length != 0){
       this.categoryObj.heldReviews = reviewsToDisplay;
+      this.categoryObj.displayContent();
+    }else{
+      this.categoryObj.heldReviews = [];
       this.categoryObj.displayContent();
     }
   }

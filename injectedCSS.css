@@ -112,10 +112,12 @@
 }
 
 .nowHidden{
+  z-index: 0;
   display: none;
 }
 
 .nowVisible{
+  z-index: 100;
   display: block;
 }
 
@@ -170,7 +172,6 @@
 
 #scrollerHolder, #searchHolder{
   position:absolute;
-  height: inherit;
   right: 0;
   width: 50%;
 }
@@ -184,29 +185,61 @@
   height: inherit;
 }
 
-.scrollButton {
+.displayWrapper{
+  text-align: center;
+}
+
+.buttonWrapper{
+  width: auto;
+  height: 40px;
+}
+
+.scrollButton, .reorderWrapper {
   position: relative;
   margin: 0 auto;
   width: auto;
   height: auto;
   display: inline-block;
-  cursor: pointer;
+}
 
+.scrollButton{
+  float: left;
+}
+
+.reorderWrapper{
+  float: right;
 }
 
 .scrollButtonLeft{
   float: left;
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+  -webkit-transform: rotate(90deg);
+  margin-right: 5px;
 }
 .scrollButtonRight{
   float: right;
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
+  -webkit-transform: rotate(270deg);
+  margin-left: 5px;
 }
-.scrollButtonLeft, .scrollButtonRight{
-  width: 100px !important;
-  margin: 0 0 !important;
+
+.reorderAscending{
+  float: left;
+  margin-right: 5px;
+}
+
+.reorderDescending{
+  float: right;
+  -webkit-transform: rotate(180deg);
+  margin-left: 5px;
+}
+
+.arrow{
+  cursor: pointer;
+  background-image: url('chrome-extension://__MSG_@@extension_id__/images/comment_icon.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.2em;
 }
 
 .trackerWrapper {

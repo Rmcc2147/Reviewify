@@ -17,8 +17,9 @@ function toggleClasses_all(elem, className){
       allElems[i].classList.remove(className);
     }
   }
-
-  (elem.classList.contains(className) == true) ? elem.classList.remove(className) : elem.classList.add(className)
+  if(elem){
+    (elem.classList.contains(className) == true) ? elem.classList.remove(className) : elem.classList.add(className)
+  }
 }
 
 function buttonTemplate(str, node){
