@@ -1,5 +1,5 @@
 {
-    "name": "Amazon comment rearranger",
+    "name": "Reviewify",
     "version": "1.0",
     "description": "Print out Amazon reviews.",
     "permissions": [
