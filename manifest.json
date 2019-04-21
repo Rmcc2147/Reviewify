@@ -28,7 +28,6 @@
           "contentScripts/reviewGrabber.js",
           "contentScripts/keyWords.js",
           "contentScripts/misc.js",
-          "contentScripts/request.js",
           "contentScripts/category.js",
           "contentScripts/init.js"
         ],

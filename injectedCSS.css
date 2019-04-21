@@ -112,12 +112,11 @@
 }
 
 .nowHidden{
-  z-index: 0;
   display: none;
+  height: 0 !important;
 }
 
 .nowVisible{
-  z-index: 100;
   display: block;
 }
 
@@ -178,6 +177,7 @@
 
 #searchBar:hover{
   background: radial-gradient(ellipse at top center, #FECD57, #c68d05);
+  cursor: default !important;
 }
 
 .reviewScroller {
@@ -223,12 +223,12 @@
 
 .reorderAscending{
   float: left;
+  -webkit-transform: rotate(180deg);
   margin-right: 5px;
 }
 
 .reorderDescending{
   float: right;
-  -webkit-transform: rotate(180deg);
   margin-left: 5px;
 }
 

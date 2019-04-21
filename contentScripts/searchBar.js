@@ -16,6 +16,7 @@ class SearchBar{
     let base = buttonTemplate("Search for a word...");
     base.id = "searchBar";
     this.input = document.createElement("input");
+    this.input.setAttribute("autocomplete", "off");
     this.input.id = "searchInput";
     base.querySelectorAll(".buttonInner")[0].appendChild(this.input);
     return base;
