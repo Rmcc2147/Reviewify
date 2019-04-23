@@ -13,7 +13,7 @@ class ReviewParser{
 
   getReviewContent(review){
     review.title = review.review.querySelectorAll(".review-title")[0].textContent;
-    review.text = review.review.querySelectorAll(".review-text")[0].textContent.replace(/[^a-zA-Z ]/g, "").removeStopWords();
+    review.text = review.review.querySelectorAll(".review-text")[0].textContent.replace(/[^a-zA-Z ]/g, "").removeStopWords().toLowerCase();
     review.keywords = this.match(review.text, this.getKeywords(review.text));
     review.stars = this.getStarRating(review.review);
     return review;

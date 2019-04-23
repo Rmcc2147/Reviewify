@@ -39,7 +39,7 @@ class SearchBar{
 
     let catHolder = this.dom.querySelectorAll("#categoryHolderInner")[0];
     let scrollHolder = this.dom.querySelectorAll("#scrollerHolder")[0];
-    let val = e.currentTarget.value;
+    let val = e.currentTarget.value.toLowerCase();
     this.reorderReviews();
     if(val && val != ""){
       let searchArr = [];
@@ -70,7 +70,7 @@ class SearchBar{
   }
 
   loadReviews(e){
-    let val = this.input.value;
+    let val = this.input.value.toLowerCase();
     let reviewsToDisplay = [];
     for(let i = 0 ; i < this.domLoader.reviews.length ; i++){
       let review = this.domLoader.reviews[i];
