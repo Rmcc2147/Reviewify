@@ -88,7 +88,7 @@ class Category{
 
     addTracker(categoryButton);
     addTracker(categoryButton);
-    categoryButton.querySelectorAll(".trackerStatic")[0].textContent = "Instances found: ";
+    categoryButton.querySelectorAll(".trackerStatic")[0].textContent = "Reviews found: ";
     this.buttonReviewNum = categoryButton.querySelectorAll(".trackerNon_static")[0];
     this.buttonReviewNum.textContent = "0";
     categoryButton.querySelectorAll(".trackerStatic")[1].textContent = "Average rating: ";
