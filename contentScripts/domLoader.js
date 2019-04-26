@@ -58,7 +58,7 @@ class DOMLoader{
   }
 
   createLoadingBar(){
-    this.loadingBar = new LoadingBar();
+    this.loadingBar = new LoadingElement();
     const INSERT_HERE = this.dom.children[1].firstChild;
     this.dom.children[1].insertBefore(this.loadingBar.wrapper, INSERT_HERE);
   }
@@ -76,9 +76,6 @@ class DOMLoader{
 
   addReviews(reviewArr){
     this.reviews = reviewArr;
-    if(typeof this.loadingBar == "object"){
-      this.loadingBar.incrementProgress();
-    }
 
     for (let i = 0; i < reviewArr.length; i++) {
       for (let j = 0 ; j < reviewArr[i].keywords.length ; j++){
@@ -94,7 +91,7 @@ class DOMLoader{
     }
   }
 
-  reorderReviews(){
+  reorderCategories(){
     this.dom.querySelectorAll("#categoryHolderInner")[0].innerHTML = "";
     this.dom.querySelectorAll("#scrollerHolder")[0].innerHTML = "";
 
@@ -142,11 +139,11 @@ function makeResizable(elem){
   }
 }
 
-class LoadingBar{
+class LoadingElement{
   constructor(){
     this.totalReviews = this.getReviewNum();
     this.reviewsFound = 0;
-    this.wrapper = this.makeBar();
+    this.wrapper = this.makeLoadingElement();
     this.loadingCircle;
     this.percentageDone;
     this.displayedText;
@@ -164,7 +161,7 @@ class LoadingBar{
     return num
   }
 
-  makeBar(){
+  makeLoadingElement(){
     let wrapper = document.createElement('div');
     wrapper.id = "loadingBar_wrapper";
 

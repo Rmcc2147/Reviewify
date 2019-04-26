@@ -44,12 +44,10 @@ class Category{
     let reorderAscending = document.createElement('div');
     reorderAscending.classList.add("reorderAscending");
     reorderAscending.classList.add("arrow");
-    //reorderAscending.textContent = "Sort Ascending";
     reorderAscending.addEventListener('click', this.sortAscending.bind(this));
     let reorderDescending = document.createElement('div');
     reorderDescending.classList.add("reorderDescending");
     reorderDescending.classList.add("arrow");
-    //reorderDescending.textContent = "Sort Descending";
     reorderDescending.addEventListener('click', this.sortDescending.bind(this));
     let reorderWrapper = document.createElement('div');
     reorderWrapper.classList.add("reorderWrapper");

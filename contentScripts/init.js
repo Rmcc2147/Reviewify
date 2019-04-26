@@ -1,6 +1,6 @@
 "use strict";
 
-chrome.runtime.sendMessage({activeStatusRequest: "status_request"}, function(response){
+chrome.runtime.sendMessage({activeStatusRequest: "status_request"}, function(response){//get system state from background script
   if(response.activeStatus == true){
     console.log("Extension state: Active");
     init();
@@ -20,7 +20,7 @@ function IsAmazonFirstProductPage(elem){
 
 async function init(){
 
-  if(!IsAmazonFirstProductPage(document)){
+  if(!IsAmazonFirstProductPage(document)){//validate page
     return console.log("No reviews to be found.");
   }
 
@@ -28,10 +28,10 @@ async function init(){
   let storedData = await STORER.getDataFromStorage();
   let domLoader = new DOMLoader();
 
-  domLoader.loadDOM();
+  domLoader.loadDOM();//static UI setup
 
   switch(storedData){
-    case(undefined):
+    case(undefined)://there is no associated content in local storage
 
       const REVIEW_PARSER = new ReviewParser();
       let reviewGrabber = new ReviewGrabber();
@@ -41,23 +41,24 @@ async function init(){
 
       domLoader.createLoadingBar();
 
-      while(reviewGrabber.url){
+      while(reviewGrabber.url){//this loop iterates over all review pages for an Amazon product. Stops when all pages have been visited.
         let reviews = await reviewGrabber.getReviews();
         let reviewContent = REVIEW_PARSER.parseReviews(reviews);
 
         for (let i = 0; i < reviewContent.length; i++) {
           allReviews.reviews.push(reviewContent[i]);
         }
-        domLoader.addReviews(reviewContent);
-        domLoader.reorderReviews();
+        domLoader.addReviews(reviewContent);//add reviews to UI
+        domLoader.reorderCategories();//reorder categories so the ones holding the most reviews are displayed on top
+        domLoader.loadingBar.incrementProgress();//increment loading bar percentage
       }
 
-      STORER.setReviews(allReviews);
+      STORER.setReviews(allReviews);//store reviews in local storage
       break;
 
-    default:
-      domLoader.addReviews(storedData.reviews);
-      domLoader.reorderReviews();
+    default://reviews found in local storage
+      domLoader.addReviews(storedData.reviews);//add reviews to UI
+      domLoader.reorderCategories();
   }
 
 }
