@@ -106,7 +106,7 @@ class DOMLoader{
 
 
   }
-}
+}//DOMLoader
 
 function makeResizable(elem){
   const RESIZER = elem.querySelectorAll("#drag_resize")[0];
@@ -137,7 +137,7 @@ function makeResizable(elem){
     RESIZER.classList.remove("buttonClicked");
     window.removeEventListener('mousemove', resize);
   }
-}
+}//makeResizable
 
 class LoadingElement{
   constructor(){
@@ -198,4 +198,4 @@ class LoadingElement{
       this.wrapper.remove();
     }.bind(this), 2500);
   }
-}
+}//LoadingElement

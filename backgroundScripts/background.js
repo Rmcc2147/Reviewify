@@ -2,7 +2,7 @@ let active;
 
 chrome.runtime.onInstalled.addListener(function() {
     active = true;
-    console.log("Ready to print reviews.");
+    console.log("Extension ready.");
   });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
