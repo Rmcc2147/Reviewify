@@ -13,12 +13,28 @@ class SearchBar{
   }
 
   createBase(){
+    //base = the whole button
     let base = buttonTemplate("Search for a word...");
     base.id = "searchBar";
+    //input = user input bar
     this.input = document.createElement("input");
     this.input.setAttribute("autocomplete", "off");
     this.input.id = "searchInput";
+    //clear = button to clear input
+    let clear = document.createElement("button");
+    clear.textContent = "Clear";
+    clear.id = "clearInputButton";
+    //function to clear the input when 'clear' is clicked
+    clear.addEventListener("click", function(e){
+      //clear the input
+      this.input.value = "";
+      //create and dispatch a fake event to trigger the onChange(e) function that handles input changes
+      let fake_event = document.createEvent("Event");
+      fake_event.initEvent("change", false, true);
+      this.input.dispatchEvent(fake_event);
+    }.bind(this));
     base.querySelectorAll(".buttonInner")[0].appendChild(this.input);
+    base.querySelectorAll(".buttonInner")[0].appendChild(clear);
     return base;
   }
 
@@ -40,8 +56,9 @@ class SearchBar{
     let catHolder = this.dom.querySelectorAll("#categoryHolderInner")[0];
     let scrollHolder = this.dom.querySelectorAll("#scrollerHolder")[0];
     let val = e.currentTarget.value.toLowerCase();
-    this.reorderReviews();
-    if(val && val != ""){
+    let val_noWhiteSpace = val.replace(/^\s+/, '').replace(/\s+$/, '');
+    this.reorderCategories();
+    if(val_noWhiteSpace && val_noWhiteSpace != ""){
       let searchArr = [];
 
       for(let i = 0 ; i < this.catObjs.length ; i++){
