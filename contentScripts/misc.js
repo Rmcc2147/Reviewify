@@ -63,6 +63,18 @@ function buttonListener(elem, scroller){
   }
 }
 
+function unselectAll(){
+  let visibleElems = document.getElementsByClassName('nowVisible');
+  let clickedElems = document.getElementsByClassName('buttonClicked');
+
+  for(let i = 0 ; i < visibleElems.length ; i++){
+    toggleClasses(visibleElems[i], 'nowVisible', 'nowHidden');
+  }
+  for(let i = 0 ; i < clickedElems.length ; i++){
+    clickedElems[i].classList.remove("buttonClicked")
+  }
+}
+
 function addTracker(elem){
     const APPEND_HERE = elem.querySelectorAll(".buttonSpan")[0];
     const APPEND_ME = document.createElement("span");

@@ -48,6 +48,7 @@ class SearchBar{
 
   //this functions context is binded to domLoader
   onChange(e){
+    unselectAll();
     document.getElementById("reviewBox").innerHTML = "";
     if(document.getElementById("scrollerForWord_###search###").classList.contains("nowVisible")){
       toggleClasses(document.getElementById("scrollerForWord_###search###"), "nowVisible", "nowHidden");
