@@ -1,0 +1,1 @@
+This stopword removal library was created and given freely by the online alias 'geeklad'. http://geeklad.com/remove-stop-words-in-javascript
