@@ -1,2 +1,0 @@
-I, Ronan McCarthy, do not claim to have any rights or ownership over any of the code details here in the 'libraries' directory.
-The .js files held here are collections of JavaScript methods, functions and tools created by groups or individuals detailed in the respective 'readme.md', designed to assist JavaScript developers with their programming.
