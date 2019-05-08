@@ -22,7 +22,7 @@ class SearchBar{
     this.input.id = "searchInput";
     //clear = button to clear input
     let clear = document.createElement("button");
-    clear.textContent = "Clear";
+    clear.textContent = "X";
     clear.id = "clearInputButton";
     //function to clear the input when 'clear' is clicked
     clear.addEventListener("click", function(e){
