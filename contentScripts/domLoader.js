@@ -157,7 +157,7 @@ class LoadingElement{
       num_with_string = num_with_string.textContent;
     }
     let num = parseFloat(num_with_string.replace(/\D/g,''));
-    num = Math.ceil(num/10)*8;
+    console.log(num);
     return num
   }
 
@@ -185,9 +185,10 @@ class LoadingElement{
   }
 
   incrementProgress(){
-    this.reviewsFound += 8;
+    this.reviewsFound += 10;
+    console.log(this.reviewsFound);
     this.displayContent();
-    if(this.percentageDone >= 100){
+    if(this.percentageDone >= 100 || this.reviewsFound >= this.totalReviews){
       this.removeBar();
     }
   }
